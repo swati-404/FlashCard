@@ -2,16 +2,31 @@
 
 {% block content %}
 <br>
-<h3>Add</h3>
-<form action="{% url 'add' %}" method="POST">
-    {% csrf_token %}
+<center>
+  {% if my_ans %}
+    <div class="alert alert-{{color}} alert-dismissible fade show" role="alert">
+  {{ my_ans }}
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+{% endif %}
+<!--    <div class="alert alert-primary" role="alert">-->
 
+<!--</div>-->
+
+<h3>{{ num_1 }} + {{ num_2 }}</h3>
+<!--{{ answer }}-->
+<form action= "{% url 'add' %}" method="POST">
+    {% csrf_token %}
   <div class="form-group">
     <input type="text" class="form-control" placeholder="Enter your answer here" name="answer">
   </div>
-
+    <input type="hidden" name="old_num_1" value="{{ num_1 }}">
+    <input type="hidden" name="old_num_2" value="{{ num_2 }}">
   <button type="submit" class="btn btn-primary">Submit</button>
 </form>
+</center>
 
 
 {% endblock %}
